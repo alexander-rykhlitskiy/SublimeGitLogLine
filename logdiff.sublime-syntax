@@ -1,0 +1,46 @@
+%YAML 1.2
+---
+# Sources
+# https://github.com/sublimehq/Packages/blob/master/Diff/Diff.sublime-syntax
+# https://github.com/sublimehq/Packages/blob/master/Git%20Formats/Git%20Log.sublime-syntax
+# https://stackoverflow.com/questions/43467232/extend-existing-tmlanguage-file
+#
+# https://www.sublimetext.com/docs/3/syntax.html
+name: Git Log-Diff
+file_extensions:
+  - logdiff
+scope: source.logdiff
+contexts:
+  main:
+    # - include: scope:text.git.log
+    - include: scope:source.diff
+    # your rules
+
+    # 1st header line
+    # commit d9d9fb804f5d61c13ba2f8746af33a9f3c609075
+    - match: (?:(commit)\s+(\h{7,}))?\s*\n
+      # scope: meta.header.git.commit markup.raw.block.git.log
+      captures:
+        1: constant.numeric.hex.hash.git.log
+        2: constant.numeric.hex.hash.git.log
+  #     push: commit-header
+  #     with_prototype:
+  #       # make sure to pop off stack for next commit
+  #       - match: ^(?=commit)
+  #         pop: true
+
+  # commit-header:
+    # All header attributes are mappings of `key: value` format.
+    # For simplicity we do not want to distinguish the entries.
+    # Author: first lastname <mail@domain.com>
+    # Date:   Wed Sep 13 22:42:14 2017 +0200
+    - match: ^(\w+)\s*(:)\s*
+      captures:
+        1: constant.numeric.hex.hash.git.log
+        2: constant.numeric.hex.hash.git.log
+      push:
+        # - meta_scope: meta.header.git.commit markup.raw.block.git.log
+        - meta_content_scope: constant.numeric.hex.hash.git.log
+        - match: \n
+          pop: true
+        # - include: Git Common.sublime-syntax#email

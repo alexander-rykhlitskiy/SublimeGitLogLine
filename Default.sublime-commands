@@ -1,0 +1,3 @@
+[
+    { "caption": "Git Log: current line", "command": "git_log_line" }
+]
