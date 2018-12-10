@@ -34,7 +34,3 @@ git clone git@github.com:alexander-rykhlitskiy/SublimeGitLogLine.git GitLogLine
 
 - Bring up the Command Palette (Control+Shift+p on Linux/Windows, Command+Shift+p on OS X).
 - Select `Git Log: current line`
-
-## TODO
-
-Make log follow renames

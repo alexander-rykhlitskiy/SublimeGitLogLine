@@ -15,7 +15,7 @@ class GitLogLineCommand(sublime_plugin.TextCommand):
         row = self.view.rowcol(self.view.line(self.view.sel()[0]).begin())[0] + 1
         fname = self.view.file_name()
         if fname is not None:
-          cmd = "git log -L " + str(row) + ",+3:" + fname
+          cmd = "git log -M35% -L " + str(row) + ",+3:" + fname
           pr = subprocess.Popen(cmd,
             cwd = os.path.dirname(self.view.file_name()),
             shell = True,
